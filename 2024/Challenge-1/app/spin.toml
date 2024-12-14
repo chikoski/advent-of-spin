@@ -1,0 +1,27 @@
+spin_manifest_version = 2
+
+[application]
+name = "app"
+version = "0.1.0"
+authors = ["N.Shimizu <chikoski@gmail.com>"]
+description = ""
+
+[[trigger.http]]
+route = "/api/wishlists"
+component = "wishlists"
+
+[[trigger.http]]
+route = "/..."
+component = "app"
+
+[component.app]
+source = { url = "https://github.com/fermyon/spin-fileserver/releases/download/v0.3.0/spin_static_fs.wasm", digest = "sha256:ef88708817e107bf49985c7cefe4dd1f199bf26f6727819183d5c996baa3d148" }
+files = [{ source = "assets", destination = "/" }]
+
+[component.wishlists]
+source = "wishlists/target/wasm32-wasip1/release/wishlists.wasm"
+allowed_outbound_hosts = []
+[component.wishlists.build]
+command = "cargo build --target wasm32-wasip1 --release"
+workdir = "wishlists"
+watch = ["src/**/*.rs", "Cargo.toml"]
