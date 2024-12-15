@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Kid {
-    name: String,
+    pub name: String,
     items: Vec<String>,
 }
 
