@@ -12,21 +12,46 @@ pub mod chikoski {
       static __FORCE_SECTION_REF: fn() =
       super::super::super::__link_custom_section_describing_imports;
       
+      use super::super::super::_rt;
+      #[derive(Clone, Eq, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
+      pub struct Score {
+        pub name: _rt::String,
+        pub score: u32,
+      }
+      impl ::core::fmt::Debug for Score {
+        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+          f.debug_struct("Score").field("name", &self.name).field("score", &self.score).finish()
+        }
+      }
       #[allow(unused_unsafe, clippy::all)]
-      pub fn calculate() -> u32{
+      pub fn calculate(name: &str,) -> Score{
         unsafe {
-
+          #[repr(align(4))]
+          struct RetArea([::core::mem::MaybeUninit::<u8>; 12]);
+          let mut ret_area = RetArea([::core::mem::MaybeUninit::uninit(); 12]);
+          let vec0 = name;
+          let ptr0 = vec0.as_ptr().cast::<u8>();
+          let len0 = vec0.len();
+          let ptr1 = ret_area.0.as_mut_ptr().cast::<u8>();
           #[cfg(target_arch = "wasm32")]
-          #[link(wasm_import_module = "chikoski:advent-of-spin/naughty-or-nice-calculatorable@0.1.0")]
+          #[link(wasm_import_module = "chikoski:advent-of-spin/naughty-or-nice-calculatorable@0.2.0")]
           extern "C" {
             #[link_name = "calculate"]
-            fn wit_import() -> i32;
+            fn wit_import(_: *mut u8, _: usize, _: *mut u8, );
           }
 
           #[cfg(not(target_arch = "wasm32"))]
-          fn wit_import() -> i32{ unreachable!() }
-          let ret = wit_import();
-          ret as u32
+          fn wit_import(_: *mut u8, _: usize, _: *mut u8, ){ unreachable!() }
+          wit_import(ptr0.cast_mut(), len0, ptr1);
+          let l2 = *ptr1.add(0).cast::<*mut u8>();
+          let l3 = *ptr1.add(4).cast::<usize>();
+          let len4 = l3;
+          let bytes4 = _rt::Vec::from_raw_parts(l2.cast(), len4, len4);
+          let l5 = *ptr1.add(8).cast::<i32>();
+          Score{
+            name: _rt::string_lift(bytes4),
+            score: l5 as u32,
+          }
         }
       }
 
@@ -34,16 +59,29 @@ pub mod chikoski {
 
   }
 }
+mod _rt {
+  pub use alloc_crate::string::String;
+  pub use alloc_crate::vec::Vec;
+  pub unsafe fn string_lift(bytes: Vec<u8>) -> String {
+    if cfg!(debug_assertions) {
+      String::from_utf8(bytes).unwrap()
+    } else {
+      String::from_utf8_unchecked(bytes)
+    }
+  }
+  extern crate alloc as alloc_crate;
+}
 
 #[cfg(target_arch = "wasm32")]
 #[link_section = "component-type:wit-bindgen:0.32.0:spin-deps:deps@0.1.0:deps:encoded world"]
 #[doc(hidden)]
-pub static __WIT_BINDGEN_COMPONENT_TYPE: [u8; 245] = *b"\
-\0asm\x0d\0\x01\0\0\x19\x16wit-component-encoding\x04\0\x07{\x01A\x02\x01A\x02\x01\
-B\x02\x01@\0\0y\x04\0\x09calculate\x01\0\x03\0<chikoski:advent-of-spin/naughty-o\
-r-nice-calculatorable@0.1.0\x05\0\x04\0\x19spin-deps:deps/deps@0.1.0\x04\0\x0b\x0a\
-\x01\0\x04deps\x03\0\0\0G\x09producers\x01\x0cprocessed-by\x02\x0dwit-component\x07\
-0.217.0\x10wit-bindgen-rust\x060.32.0";
+pub static __WIT_BINDGEN_COMPONENT_TYPE: [u8; 279] = *b"\
+\0asm\x0d\0\x01\0\0\x19\x16wit-component-encoding\x04\0\x07\x9c\x01\x01A\x02\x01\
+A\x02\x01B\x04\x01r\x02\x04names\x05scorey\x04\0\x05score\x03\0\0\x01@\x01\x04na\
+mes\0\x01\x04\0\x09calculate\x01\x02\x03\0<chikoski:advent-of-spin/naughty-or-ni\
+ce-calculatorable@0.2.0\x05\0\x04\0\x19spin-deps:deps/deps@0.1.0\x04\0\x0b\x0a\x01\
+\0\x04deps\x03\0\0\0G\x09producers\x01\x0cprocessed-by\x02\x0dwit-component\x070\
+.217.0\x10wit-bindgen-rust\x060.32.0";
 
 #[inline(never)]
 #[doc(hidden)]

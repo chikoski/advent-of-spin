@@ -1,7 +1,11 @@
-package chikoski:advent-of-spin@0.1.0;
+package chikoski:advent-of-spin@0.2.0;
 
 interface naughty-or-nice-calculatorable {
-    calculate: func() -> u32;
+    record score {
+        name: string,
+        score: u32,
+    }
+    calculate: func(name: string) -> score;
 }
 
 world naughty-or-nice-calculator {

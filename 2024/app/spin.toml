@@ -40,5 +40,4 @@ workdir = "naughty-or-nice"
 watch = ["src/**/*.rs", "Cargo.toml"]
 
 [component.naughty-or-nice.dependencies]
-"chikoski:advent-of-spin/naughty-or-nice-calculatorable@0.1.0" = { path = "lib/naughty-or-nice-calculator/naughty-or-nice-calculator.wasm" }
-# "chikoski:advent-of-spin/naughty-or-nice-calculatorable@0.1.0" = { version = "^0.1.0", registry = "wa.dev", package = "chikoski:naughty-or-nice-calculator" }
+"chikoski:advent-of-spin/naughty-or-nice-calculatorable@0.2.0" = { path = "lib/naughty-or-nice-calculator/naughty-or-nice-calculator.wasm" }
