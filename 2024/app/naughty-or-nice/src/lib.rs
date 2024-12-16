@@ -5,7 +5,7 @@ use std::error::Error;
 use percent_encoding::percent_decode_str;
 use serde::Serialize;
 use spin_sdk::http::{IntoResponse, Params, Request, Response, Router};
-use spin_sdk::{http_component, http_router};
+use spin_sdk::http_component;
 use bindings::deps::chikoski::advent_of_spin::naughty_or_nice_calculatorable::calculate;
 
 /// A simple Spin HTTP component.
