@@ -1,0 +1,9 @@
+package chikoski:advent-of-spin@0.1.0;
+
+interface naughty-or-nice-calculatorable {
+    calculate: func() -> u32;
+}
+
+world naughty-or-nice-calculator {
+    export naughty-or-nice-calculatorable;
+}
